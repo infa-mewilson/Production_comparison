@@ -115,7 +115,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 					if timeNew == 0 || timeOld == 0 {
 						percDiffvalue := "No Hits for one of the selected Dates"
 						white = white + 1
-						html_for_Global_Services = html_for_Global_Services + "<tr style='background:White'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + percDiffvalue + " %</td></tr>"
+						html_for_Global_Services = html_for_Global_Services + "<tr style='background:White'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + percDiffvalue + " </td></tr>"
 					}
 					percDiff := utils.CalcPerc(float64(diff), float64(timeOld))
 
