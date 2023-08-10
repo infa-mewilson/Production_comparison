@@ -132,7 +132,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
       "containername":"scim-service",
       "logfilepath":"*/var/log/containers/scim-service*"
     },{
-      "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ and /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ and /addSamlRoleMappings","PUT /saas/public/core/v3/Orgs/ and /removeSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ and /removeSamlRoleMappings"],
+      "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /addSamlRoleMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlRoleMappings"],
       "containername":"v3api",
       "logfilepath":"*/var/log/containers/v3api*"
     }
