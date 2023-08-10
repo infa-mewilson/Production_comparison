@@ -46,7 +46,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/bundle-service*"
     },
     {
-        "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/logout","POST /identity-service/api/v1/Login","POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/logout","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /addSamlRoleMappings","/saas/public/core/v3/Orgs/ *and* /removeSamlGroupMappings","/saas/public/core/v3/Orgs/ *and* /removeSamlRoleMappings"],
+        "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/logout","POST /identity-service/api/v1/Login","POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/logout","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /addSamlRoleMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlRoleMappings"],
         "containername":"v3api",
         "logfilepath":"*/var/log/containers/v3api"
     },
