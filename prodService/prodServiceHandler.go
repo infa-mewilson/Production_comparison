@@ -123,7 +123,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 						yellow = yellow + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Yellow'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff <= -20 && !math.IsInf(percDiff, 0) {
+					if percDiff <= -20 && !math.IsInf(percDiff, 0)&& timeOld !=0 {
 						red = red + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Red'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
