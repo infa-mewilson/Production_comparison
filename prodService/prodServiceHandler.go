@@ -87,7 +87,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 		p = p + fmt.Sprintf("<div style='background:#80bfff;text-align:center'><p><b>Response Time Comparision between before Changes(%s to %s) and After Changes (%s to %s)</p> </b></div>", beforedeploymentStartDate, beforedeploymentEndDate, AfterDeploymentStartDate, AfterDeploymentEndDate)
 
 		countapisforGlobal = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Global Services </b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ")
-		html_for_Global_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Global Services </b></td></tr><tr><th>API</th><th>Before Deployment</th><th>After Deployment</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
+		html_for_Global_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Global Services </b></td></tr><tr><th>API</th><th>Before Changes</th><th>After Changes</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
 		newidsdataSorted := utils.SortingMap(newIDS_Data)
 		//log.Println(newidsdataSorted)
 		var green int
@@ -152,7 +152,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 
 	if len(oldAPP_Pod_Data) != 0 && len(newAPP_Pod_Data) != 0 {
 		countapisforApp = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Application Services </b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ")
-		html_for_App_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Application Services </b></td></tr><tr><th>API</th><th>Before Deployment</th><th>After Deployment</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
+		html_for_App_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Application Services </b></td></tr><tr><th>API</th><th>Before Changes</th><th>After Changes</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
 		newAPP_POd_Sorted := utils.SortingMap(newAPP_Pod_Data)
 		log.Println(newAPP_POd_Sorted)
 		var green1 int
