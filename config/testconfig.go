@@ -16,7 +16,6 @@ type APIDteails struct {
 		LicenseService      []string `json:"license-service,omitempty"`
 		JlsService          []string `json:"jls-service,omitempty"`
 		BundleService       []string `json:"bundle-service,omitempty"`
-		V3api               []string `json:"v3api,omitempty"`
 		SessionService      []string `json:"session-service,omitempty"`
 		Frs                 []string `json:"frs,omitempty"`
 		AuditService        []string `json:"audit-service,omitempty"`
@@ -25,7 +24,6 @@ type APIDteails struct {
 		AdminService        []string `json:"admin-service,omitempty"`
 		Vcs                 []string `json:"vcs,omitempty"`
 		AcService           []string `json:"ac-service,omitempty"`
-		ScimService         []string `json:"scim-service,omitempty"`
 		LdmService          []string `json:"ldm-service,omitempty"`
 		Runtime             []string `json:"runtime,omitempty"`
 	} `json:"iics-qa-perfusw1"`
