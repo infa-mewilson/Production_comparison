@@ -22,7 +22,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
       "logfilepath":"*/var/log/containers/kms*"
     },
     {
-        "notification-service":["GET /notification-service/api/v1/Users( *and* )/ReceivedMessages?$count=true&$filter=status%20eq%20%27NEW%27%20and%20(messageType%20eq%20%27BELL_NOTIFICATION%27)&$top=0","GET /notification-service/api/v1/Users( *and* )/ReceivedMessages?$skip=0&$top=10","POST /notification-service/api/v1/Topics('user *and* )/Messages","POST /notification-service/api/v1/Topics('org *and* )/Messages","POST /notification-service/api/v1/MarkAllNotificationsAsRead"],
+        "notification-service":["GET /notification-service/api/v1/Users( *and* )/ReceivedMessages?$count=true&$filter=status%20eq%20%27NEW%27%20and%20(messageType%20eq%20%27BELL_NOTIFICATION%27)&$top=0","GET /notification-service/api/v1/Users( *and* )/ReceivedMessages?$skip=0&$top=10","POST /notification-service/internal/api/v1/Topics('user *and* )/Messages","POST /notification-service/internal/api/v1/Topics('org *and* )/Messages","POST /notification-service/api/v1/MarkAllNotificationsAsRead"],
         "containername":"notification-service",
         "logfilepath":"*/var/log/containers/notification-service*"
     },
@@ -61,7 +61,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/auditlog-service*"
     },
     {
-        "preference-service":["POST /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/Users *and* )/Preferences","PUT /preference-service/api/v1/Users( *and* )/Preferences","DELETE /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/System/Preferences","POST /preference-service/api/v1/Orgs( *and* )/Preferences","GET /preference-service/api/v1/Orgs( *and* )/Preferences","DELETE /preference-service/api/v1/Orgs( *and* )/Preferences('iics.feature.onboard.wizardCompleted')"],
+        "preference-service":["POST /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/Users *and* )/Preferences","PUT /preference-service/api/v1/Users( *and* )/Preferences","DELETE /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/internal/api/v1/System/Preferences","POST /preference-service/api/v1/Orgs( *and* )/Preferences","GET /preference-service/api/v1/Orgs( *and* )/Preferences","DELETE /preference-service/api/v1/Orgs( *and* )/Preferences('iics.feature.onboard.wizardCompleted')"],
         "containername":"preference-service",
         "logfilepath":"*/var/log/containers/preference-service*"
     },
