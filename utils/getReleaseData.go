@@ -31,7 +31,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "containername":"ca-service",
         "logfilepath":"*/var/log/containers/ca-service*"
     },
-    {   "license-service":["POST license-service/api/v1/OrgLicenseAssignment( *and* )/AssignEdition()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/View()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/EffectiveLicenses()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/EffectiveAppExternalId()","GET /license-service/api/v1/metering/definitions","POST license-service/api/v1/metering/org/( *and* )/usage"],
+    {   "license-service":["POST /license-service/podlink/api/v1/OrgLicenseAssignment( *and* )/AssignEdition()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/View()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/EffectiveLicenses()","GET /license-service/internal/api/v1/OrgLicenseAssignment( *and* )/EffectiveAppExternalId()","GET /license-service/api/v1/metering/definitions","POST license-service/api/v1/metering/org/( *and* )/usage"],
         "containername":"license-service",
         "logfilepath":"*/var/log/containers/license-service*"
     },
