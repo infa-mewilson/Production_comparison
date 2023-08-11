@@ -119,15 +119,15 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 					}
 					percDiff := utils.CalcPerc(float64(diff), float64(timeOld))
 
-					if percDiff < 0 && percDiff > -20 {
+					if percDiff < 0 && percDiff > -20 && timeOld !=0 && timeNew !=0 {
 						yellow = yellow + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Yellow'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff <= -20 && !math.IsInf(percDiff, 0)&& timeOld !=0 {
+					if percDiff <= -20 && !math.IsInf(percDiff, 0)&& timeOld !=0 && timeNew !=0 {
 						red = red + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Red'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff > 0 {
+					if percDiff > 0 && timeOld !=0 && timeNew !=0 {
 						green = green + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Green'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
@@ -182,15 +182,15 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 						html_for_App_Services = html_for_App_Services + "<tr style='background:White'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + percDiffvalue1 + "</td></tr>"
 					}
 					percDiff1 := utils.CalcPerc(float64(diff1), float64(timeOld1))
-					if percDiff1 < 0 && percDiff1 > -20 {
+					if percDiff1 < 0 && percDiff1 > -20 && timeOld !=0 && timeNew !=0 {
 						yellow1 = yellow1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Yellow'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) {
+					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) && timeOld !=0 && timeNew !=0 {
 						red1 = red1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Red'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 >= 0 {
+					if percDiff1 >= 0 && timeOld !=0 && timeNew !=0 {
 						green1 = green1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Green'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
