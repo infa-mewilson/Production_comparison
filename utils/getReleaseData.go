@@ -46,7 +46,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/bundle-service*"
     },
     {
-        "session-service":["GET /session-service/api/v1/session/User","GET /session-service/api/v1/session/Agent","POST /identity-service/agent/api/v1/Logout","GET /session-service/internal/api/v1/cache/ServiceAndUserInfo","GET /session-service/api/v1/Orgs( *and* )/Parent","DELETE /session-service/api/v1/session/Logout"],
+        "session-service":["GET /session-service/api/v1/session/User","GET /session-service/api/v1/session/Agent","GET /session-service/internal/api/v1/cache/ServiceAndUserInfo","GET /session-service/api/v1/Orgs( *and* )/Parent","DELETE /session-service/api/v1/session/Logout"],
         "containername":"session-service",
         "logfilepath":"*/var/log/containers/session-service*"
     },
