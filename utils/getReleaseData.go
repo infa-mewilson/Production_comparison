@@ -46,11 +46,6 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/bundle-service*"
     },
     {
-        "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/logout","POST /identity-service/api/v1/Login","POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/logout","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /addSamlRoleMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlRoleMappings"],
-        "containername":"v3api",
-        "logfilepath":"*/var/log/containers/v3api"
-    },
-    {
         "session-service":["GET /session-service/api/v1/session/User","GET /session-service/api/v1/session/Agent","POST /identity-service/agent/api/v1/Logout","GET /session-service/internal/api/v1/cache/ServiceAndUserInfo","GET /session-service/api/v1/Orgs( *and* )/Parent","DELETE /session-service/api/v1/session/Logout"],
         "containername":"session-service",
         "logfilepath":"*/var/log/containers/session-service*"
@@ -91,11 +86,6 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/ac*"
     },
     {
-        "scim-service":["GET /ma/api/v3/SCIMToken","GET /scim-service/v2/Users/","GET /scim-service/Groups/","POST /scim-service/Users","PATCH /scim-service/Users/","POST /scim-service/v2/Groups","PATCH /scim-service/v2/Groups/","PUT /scim-service/v2/Groups/","GET /scim-service/Groups?excludedAttributes=members&filter=displayName","DELETE /scim-service/Users/","DELETE /scim-service/Groups/"],
-        "containername":"ma-service",
-        "logfilepath":"*/var/log/containers/ma-service"
-    },
-    {
         "ldm-service":["GET /ldm/api/v1/connection"],
         "containername":"ldm-service",
         "logfilepath":"*/var/log/containers/ldm-service*"
@@ -124,11 +114,11 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
       "containername":"identity-service",
       "logfilepath":"*/var/log/containers/identity-service*"
     },{
-      "ma-service":["POST /ma/api/v2/user/login","POST /ma/api/v2/user/logout","POST /ma/api/v3/InternalLogin","GET /ma/api/v3/Users(","GET /ma/home","POST /ma/podlink/api/v3/Login","POST /ma/api/v3/Users","POST /ma/api/v3/DeleteUser","POST /ma/api/v3/agent/Login","POST /ma/api/v3/agent/Logout","POST /ma/api/v3/Logout"],
+      "ma-service":["GET /ma/api/v3/SCIMToken","POST /ma/api/v2/user/login","POST /ma/api/v2/user/logout","POST /ma/api/v3/InternalLogin","GET /ma/api/v3/Users(","GET /ma/home","POST /ma/podlink/api/v3/Login","POST /ma/api/v3/Users","POST /ma/api/v3/DeleteUser","POST /ma/api/v3/agent/Login","POST /ma/api/v3/agent/Logout","POST /ma/api/v3/Logout"],
       "containername":"ma-service",
       "logfilepath":"*/var/log/containers/ma-service*"
     },{
-      "scim-service":["GET /scim-service/Users/","GET /ma/api/v3/SCIMToken"],
+      "scim-service":["GET /scim-service/Users/","GET /scim-service/v2/Users/","GET /scim-service/Groups/","POST /scim-service/Users","PATCH /scim-service/Users/","POST /scim-service/v2/Groups","PATCH /scim-service/v2/Groups/","PUT /scim-service/v2/Groups/","GET /scim-service/Groups?excludedAttributes=members&filter=displayName","DELETE /scim-service/Users/","DELETE /scim-service/Groups/"],
       "containername":"scim-service",
       "logfilepath":"*/var/log/containers/scim-service*"
     },{
@@ -179,10 +169,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
 			query := buildmyquery(StartDate, EndDate, apisofservices, containernames, filepaths, pod1)
 			SendESRequest(apisofservices, perfusw1map, query)
 		}
-		for _, apis := range perfusw1.V3api {
-			query := buildmyquery(StartDate, EndDate, apis, containernames, filepaths, pod1)
-			SendESRequest(apis, perfusw1map, query)
-		}
+		
 		for _, apisofservices := range perfusw1.SessionService {
 			query := buildmyquery(StartDate, EndDate, apisofservices, containernames, filepaths, pod1)
 			SendESRequest(apisofservices, perfusw1map, query)
@@ -214,10 +201,6 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
 		for _, apisofservices := range perfusw1.AcService {
 			query := buildmyquery(StartDate, EndDate, apisofservices, containernames, filepaths, pod1)
 			SendESRequest(apisofservices, perfusw1map, query)
-		}
-		for _, apis := range perfusw1.ScimService {
-			query := buildmyquery(StartDate, EndDate, apis, containernames, filepaths, pod1)
-			SendESRequest(apis, perfusw1map, query)
 		}
 		for _, apis := range perfusw1.LdmService {
 			query := buildmyquery(StartDate, EndDate, apis, containernames, filepaths, pod1)
