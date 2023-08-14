@@ -182,15 +182,15 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 						html_for_App_Services = html_for_App_Services + "<tr style='background:White'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + percDiffvalue1 + "</td></tr>"
 					}
 					percDiff1 := utils.CalcPerc(float64(diff1), float64(timeOld1))
-					if percDiff1 < 0 && percDiff1 > -20 && timeOld !=0 && timeNew !=0 {
+					if percDiff1 < 0 && percDiff1 > -20 && timeOld1 !=0 && timeNew1 !=0 {
 						yellow1 = yellow1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Yellow'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) && timeOld !=0 && timeNew !=0 {
+					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) && timeOld1 !=0 && timeNew1 !=0 {
 						red1 = red1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Red'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 >= 0 && timeOld !=0 && timeNew !=0 {
+					if percDiff1 >= 0 && timeOld1 !=0 && timeNew1 !=0 {
 						green1 = green1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Green'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
