@@ -12,7 +12,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
 	listdetails := `{
   "iics-qa-perfusw1":[
      {
-      "scheduler-service":["POST /scheduler-service/api/v1/Schedules","PATCH /scheduler-service/api/v1/Schedules","GET /scheduler-service/internal/api/v1/Jobs","GET scheduler-service/api/v1/Organizations *and* /Jobs","POST /scheduler-service/api/v1/Schedules *and* /Jobs","PUT /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Schedules","DELETE /scheduler-service/api/v1/Jobs","GET /scheduler-service/api/v1/Jobs","DELETE /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Organizations *and* /Schedules"],
+      "scheduler-service":["POST /scheduler-service/api/v1/Schedules","GET /scheduler-service/internal/api/v1/Jobs","POST /scheduler-service/api/v1/Schedules *and* /Jobs","PUT /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Schedules","DELETE /scheduler-service/api/v1/Jobs","GET /scheduler-service/api/v1/Jobs","DELETE /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Organizations *and* /Schedules"],
       "containername":"scheduler-service",
       "logfilepath":"*/var/log/containers/scheduler*"
     },
@@ -36,7 +36,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/license-service*"
     },
     {
-        "jls-service":["GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries","GET /jls-di/api/v1/JobStatusChart","GET /jls-di/api/v1/Orgs( *and* )/FlattenedJobLogEntries(","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$count=true&$top=0&$filter=startedBy","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$skip=0&$top=25&$filter=startedBy"],
+        "jls-service":["GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries","GET /jls-di/api/v1/JobStatusChart","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$count=true&$top=0&$filter=startedBy","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$skip=0&$top=25&$filter=startedBy"],
         "containername":"jls-di",
         "logfilepath":"*/var/log/containers/jls-di*"
     },
@@ -51,7 +51,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/session-service*"
     },
     {
-        "frs":["GET /frs/internal/api/v1/DocumentTypes","GET /frs/api/v1/Projects","POST /frs/api/v1/Projects","POST /frs/v1/Projects *and* /Folders","GET /frs/api/v1/Projects","GET /frs/v1/Folders(","POST /frs/api/v1/UpdateEntityAccess","POST /frs/internal/api/v1/GetPermissions","POST frs/internal/api/v1/GetEffPrivilegeForDoctypeContainer","GET /frs/api/v1/Projects?$expand=sourceControlAttributes&$orderby=name","POST /frs/v1/LookupArtifactsDetailsByPath","GET /frs/api/v1/FetchProjectStatForRecentEntity()","GET /frs/api/v1/FetchDefaultLocation()","GET /frs/api/v1/BaseEntities","DELETE /frs/v1/Folders(","DELETE /frs/api/v1/Projects("],
+        "frs":["GET /frs/internal/api/v1/DocumentTypes","GET /frs/api/v1/Projects","POST /frs/api/v1/Projects","POST /frs/v1/Projects *and* /Folders","GET /frs/api/v1/Projects","GET /frs/v1/Folders(","POST /frs/api/v1/UpdateEntityAccess","POST /frs/internal/api/v1/GetPermissions","POST frs/internal/api/v1/GetEffPrivilegeForDoctypeContainer","GET /frs/api/v1/Projects?$expand=sourceControlAttributes&$orderby=name","POST /frs/v1/LookupArtifactsDetailsByPath","GET /frs/api/v1/FetchProjectStatForRecentEntity()","GET /frs/api/v1/FetchDefaultLocation()","GET /frs/api/v1/BaseEntities","DELETE /frs/api/v1/Projects("],
         "containername":"frs",
         "logfilepath":"*/var/log/containers/frs*"
     },
@@ -61,7 +61,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/auditlog-service*"
     },
     {
-        "preference-service":["POST /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/Users *and* )/Preferences","PUT /preference-service/api/v1/Users( *and* )/Preferences","DELETE /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/internal/api/v1/System/Preferences","POST /preference-service/api/v1/Orgs( *and* )/Preferences","GET /preference-service/api/v1/Orgs( *and* )/Preferences","DELETE /preference-service/api/v1/Orgs( *and* )/Preferences('iics.feature.onboard.wizardCompleted')"],
+        "preference-service":["POST /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/Users *and* )/Preferences","PUT /preference-service/api/v1/Users( *and* )/Preferences","DELETE /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/internal/api/v1/System/Preferences","POST /preference-service/api/v1/Orgs( *and* )/Preferences","GET /preference-service/api/v1/Orgs( *and* )/Preferences"],
         "containername":"preference-service",
         "logfilepath":"*/var/log/containers/preference-service*"
     },
@@ -81,7 +81,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/vcs*"
     },
     {
-        "ac-service":["GET /ac/logout","GET /ac/resources/static/images/dlg_close.gif","GET /ac/resources/static/js/lang/calendar-en.js","GET /ac/resources/static/images/Loading.gif"],
+        "ac-service":["GET /ac/logout","GET /ac/resources/static/images/dlg_close.gif","GET /ac/resources/static/images/Loading.gif"],
         "containername":"ac",
         "logfilepath":"*/var/log/containers/ac*"
     },
@@ -106,7 +106,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
       "containername":"branding-service",
       "logfilepath":"*/var/log/containers/branding-service*"
     },{
-      "content-repository":["GET /content-repo/api/v1/Contents?$filter=contentType","GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_MAPPINGS')?$expand=tags","GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_TASKFLOWS)?$expand=tags"],
+      "content-repository":["GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_MAPPINGS')?$expand=tags","GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_TASKFLOWS)?$expand=tags"],
       "containername":"content-repository-service",
       "logfilepath":"*/var/log/containers/content-repository-service*"
     },{
@@ -122,7 +122,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
       "containername":"scim-service",
       "logfilepath":"*/var/log/containers/scim-service*"
     },{
-      "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /addSamlRoleMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlGroupMappings","PUT /saas/public/core/v3/Orgs/ *and* /removeSamlRoleMappings"],
+      "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings"],
       "containername":"v3api",
       "logfilepath":"*/var/log/containers/v3api*"
     }
