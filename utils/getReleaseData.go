@@ -56,7 +56,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/frs*"
     },
     {
-        "audit-service":["GET /auditlog-service/api/v1/Orgs( *and* )/AuditEntries?$count=true"],
+        "audit-service":["GET /auditlog-service/internal/api/v1/Orgs *and* /AuditEntries"],
         "containername":"auditlog-service",
         "logfilepath":"*/var/log/containers/auditlog-service*"
     },
