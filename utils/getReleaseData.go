@@ -51,7 +51,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/session-service*"
     },
     {
-        "frs":["GET /frs/internal/api/v1/DocumentTypes","GET /frs/api/v1/Projects","POST /frs/api/v1/Projects","POST /frs/v1/Projects *and* /Folders","GET /frs/api/v1/Projects","GET /frs/v1/Folders(","POST /frs/api/v1/UpdateEntityAccess","POST /frs/internal/api/v1/GetPermissions","POST frs/internal/api/v1/GetEffPrivilegeForDoctypeContainer","GET /frs/api/v1/Projects?$expand=sourceControlAttributes&$orderby=name","POST /frs/v1/LookupArtifactsDetailsByPath","GET /frs/api/v1/FetchProjectStatForRecentEntity()","GET /frs/api/v1/FetchDefaultLocation()","GET /frs/api/v1/BaseEntities","DELETE /frs/api/v1/Projects("],
+        "frs":["GET /frs/internal/api/v1/DocumentTypes","GET /frs/api/v1/Projects","POST /frs/api/v1/Projects","POST /frs/v1/Projects *and* /Folders","GET /frs/api/v1/Projects","GET /frs/v1/Folders(","POST /frs/api/v1/UpdateEntityAccess","POST /frs/internal/api/v1/GetPermissions","POST frs/internal/api/v1/GetEffPrivilegeForDoctypeContainer","GET /frs/api/v1/Projects?$expand=sourceControlAttributes&$orderby=name","POST /frs/v1/LookupArtifactsDetailsByPath","GET /frs/api/v1/FetchProjectStatForRecentEntity()","GET /frs/api/v1/FetchDefaultLocation()","GET /frs/api/v1/BaseEntities"],
         "containername":"frs",
         "logfilepath":"*/var/log/containers/frs*"
     },
