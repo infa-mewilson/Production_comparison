@@ -66,7 +66,7 @@ func ReleaseData(StartDate string, EndDate string, ids string, pod1 string, envi
         "logfilepath":"*/var/log/containers/preference-service*"
     },
     {
-        "migration-service":["POST /migration/api/v1/ImportJobs/$package","POST /migration/api/v1/ImportJobs( *and* /OData.migration_service.StartImportJob","GET /migration/api/v1/ImportJobs","GET /migration/api/v1/ImportJobs( *and* /ImportObjects"],
+        "migration-service":["POST /migration/api/v1/ImportJobs/$package","POST /migration/api/v1/ImportJobs( *and* /OData.migration_service.StartImportJob","GET /migration/api/v1/ImportJobs","GET /migration/api/v1/ImportJobs( *and* /ImportObjects","POST /migration/api/v1/ExportJobs","GET /migration/api/v1/ExportJobs","GET migration/api/v1/ExportJobs( *and* )/ExportObjects"],
         "containername":"migration-service",
         "logfilepath":"*/var/log/containers/migration-service*"
     },
