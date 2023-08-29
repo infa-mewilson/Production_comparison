@@ -28,7 +28,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 func displayenvdetails(w http.ResponseWriter, r *http.Request){
 	data := `<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
 		<h1>Global Environments</h1>
-		<ul>
+		<ul>`
 		environments := []string{
 "AWS/IICS/PROD/MAIDS",
 "AWS/IICS/PROD/DMEM",
