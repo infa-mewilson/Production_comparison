@@ -25,7 +25,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonBody)
 }
-func displayenvdetails(){
+func displayenvdetails(w http.ResponseWriter, r *http.Request){
 	data := `<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
 		<h1>Global Environments</h1>
 		<ul>
