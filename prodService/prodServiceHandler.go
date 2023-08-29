@@ -26,9 +26,7 @@ func test(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonBody)
 }
 func displayenvdetails(w http.ResponseWriter, r *http.Request){
-	data := fmt.Sprintf("<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
-		<h1>Global Environments</h1>
-		<ul>")
+	data := fmt.Sprintf("<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body><h1>Global Environments</h1><ul>")
 		environments := []string{
 "AWS/IICS/PROD/MAIDS",
 "AWS/IICS/PROD/DMEM",
@@ -53,9 +51,7 @@ func displayenvdetails(w http.ResponseWriter, r *http.Request){
 for _, env := range environments {
 data = data + fmt.Sprintf("<li>%s</li>", env)
 }
-data = data+ fmt.Sprintf("</ul></body></html>
-<h1>Application Environments</h1>
-<ul>")
+data = data+ fmt.Sprintf("</ul></body></html><h1>Application Environments</h1><ul>")
 Applenvironments := []string{
 "AWS/IICS/PROD/USW1",
 "AWS/IICS/PROD/USW3",
