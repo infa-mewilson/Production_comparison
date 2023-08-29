@@ -25,6 +25,70 @@ func test(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonBody)
 }
+func displayenvdetails(){
+	data := `<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
+		<h1>Global Environments</h1>
+		<ul>
+		environments := []string{
+"AWS/IICS/PROD/MAIDS",
+"AWS/IICS/PROD/DMEM",
+"AWS/IICS/PROD/DMCA",
+"AWS/IICS/PROD/DMAP",
+"AWS/IICS/PROD/DMAPNE",
+"AWS/IICS/PROD/FORD-IDS",
+"AWS/IICS/PROD/SDEL-IDS",
+"AWS/IICS/PROD/PDEL-IDS",
+"AWS/IICS/PROD/ICINQ1-IDS",
+"AWS/IICS/PROD/UKIDS",
+"AZURE/IICS/PROD/MAIDS",
+"AZURE/IICS/PROD/DMEM",
+"AZURE/IICS/PROD/DMEMSE",
+"AZURE/IICS/PROD/DMCA",
+"AZURE/IICS/PROD/DMAPSE",
+"AZURE/IICS/PROD/AUIDS",
+"AZURE/IICS/PROD/NTTJP1-IDS",
+"GCP/IICS/PROD/MAIDS",
+"GCP/IICS/PROD/DMEM"
+}
+for _, env := range environments {
+data += fmt.Sprintf("<li>%s</li>", env)
+}
+data += `</ul></body></html>`
+<h1>Application Environments</h1>
+<ul>
+Applenvironments := []string{
+"AWS/IICS/PROD/USW1",
+"AWS/IICS/PROD/USW3",
+"AWS/IICS/PROD/USW5",
+"AWS/IICS/PROD/USE2",
+"AWS/IICS/PROD/USE4",
+"AWS/IICS/PROD/USE6",
+"AWS/IICS/PROD/APNE2",
+"AWS/IICS/PROD/APSE1",
+"AWS/IICS/PROD/FORD-USE1",
+"AWS/IICS/PROD/SDEL-POD",
+"AWS/IICS/PROD/PDEL-POD",
+"AWS/IICS/PROD/ICINQ1-USW1",
+"AWS/IICS/PROD/EMW1",
+"AWS/IICS/PROD/UK1",
+"AWS/IICS/PROD/NAC1",
+"AZURE/IICS/PROD/USW1",
+"AZURE/IICS/PROD/USW2",
+"AZURE/IICS/PROD/APCUC1",
+"AZURE/IICS/PROD/APSE1",
+"AZURE/IICS/PROD/CAC2",
+"AZURE/IICS/PROD/EMC1",
+"AZURE/IICS/PROD/EMSE1",
+"AZURE/IICS/PROD/NTTJP1-POD",
+"GCP/IICS/PROD/USW1",
+"GCP/IICS/PROD/EMW2"
+}
+for _, env1 := range Applenvironments {
+data += fmt.Sprintf("<li>%s</li>", env1)
+}
+w.Header().Set("Content-Type", "text/html")
+fmt.Fprint(w, data)
+}
 
 func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 	//get the values from the parameters in the POST request to variables
