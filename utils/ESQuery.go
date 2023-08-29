@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func buildmyquery(startDate string, EndDate string, apis string, cont string, filepath string, podname string) string {
+func buildmyquery(startDate string, EndDate string, apis string, cont string, filepath string, env string) string {
 	var query string
 	if strings.Contains(apis, "*and*") {
 		partsofAPI := strings.Split(apis, "*and*")
@@ -16,14 +16,14 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
   "aggs": {
     "0": {
       "percentiles": {
-        "field": "svctimeInMS",
+        "field": "%s",
         "percents": [
           95,90
         ]
       }
     },"1": {
       "avg": {
-        "field": "svctimeInMS"
+        "field": "%s"
       }
     }
   },
@@ -126,19 +126,7 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
                   "should": [
                     {
                       "term": {
-                        "kubernetes.container.name": "%s"
-                      }
-                    }
-                  ],
-                  "minimum_should_match": 1
-                }
-              },
-              {
-                "bool": {
-                  "should": [
-                    {
-                      "term": {
-                        "kubernetes.namespace": "%s"
+                        "environment": "%s"
                       }
                     }
                   ],
@@ -162,7 +150,7 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
         },
         {
           "exists": {
-            "field": "svctimeInMS"
+            "field": "%s"
           }
         },
         {
@@ -179,12 +167,18 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
         
       ],
       "must_not": [
-        
       ]
     }
   }
 }`
-		query = fmt.Sprintf(query, partsofAPI[0], partsofAPI[1], cont, podname, filepath, startDate, EndDate)
+		if strings.Contains(apis, "internal") {
+			ResponseTime := "svctimeInMS"
+			query = fmt.Sprintf(query, ResponseTime, ResponseTime, partsofAPI[0], partsofAPI[1], env, filepath, ResponseTime, startDate, EndDate)
+		} else {
+			ResponseTime := "temp.duration"
+			haproxy := "/var/log/haproxy.log"
+			query = fmt.Sprintf(query, ResponseTime, ResponseTime, partsofAPI[0], partsofAPI[1], env, haproxy, ResponseTime, startDate, EndDate)
+		}
 	} else {
 		// String doesn't contain " and "
 		//fmt.Println("String does not contain ' and '")
@@ -192,14 +186,14 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
   "aggs": {
     "0": {
       "percentiles": {
-        "field": "svctimeInMS",
+        "field": "%s",
         "percents": [
           95,90
         ]
       }
     },"1": {
       "avg": {
-        "field": "svctimeInMS"
+        "field": "%s"
       }
     }
   },
@@ -296,19 +290,7 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
                   "should": [
                     {
                       "term": {
-                        "kubernetes.container.name": "%s"
-                      }
-                    }
-                  ],
-                  "minimum_should_match": 1
-                }
-              },
-              {
-                "bool": {
-                  "should": [
-                    {
-                      "term": {
-                        "kubernetes.namespace": "%s"
+                        "environment": "%s"
                       }
                     }
                   ],
@@ -332,7 +314,7 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
         },
         {
           "exists": {
-            "field": "svctimeInMS"
+            "field": "%s"
           }
         },
         {
@@ -354,8 +336,14 @@ func buildmyquery(startDate string, EndDate string, apis string, cont string, fi
     }
   }
 }`
-		query = fmt.Sprintf(query, apis, cont, podname, filepath, startDate, EndDate)
+		if strings.Contains(apis, "internal") {
+			ResponseTime := "svctimeInMS"
+			query = fmt.Sprintf(query, ResponseTime, ResponseTime, apis, env, filepath, ResponseTime, startDate, EndDate)
+		} else {
+			ResponseTime := "temp.duration"
+			haproxy := "/var/log/haproxy.log"
+			query = fmt.Sprintf(query, ResponseTime, ResponseTime, apis, env, haproxy, ResponseTime, startDate, EndDate)
+		}
 	}
-
 	return query
 }
