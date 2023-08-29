@@ -31,16 +31,14 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 
 	predeploymentdates := request.URL.Query().Get("PreDeploymentDates")
 	postdeploymentdates := request.URL.Query().Get("PostDeploymentDates")
-	pod1 := request.URL.Query().Get("ApplicationNamespace")
-	ids := request.URL.Query().Get("GlobalNamespace")
-	RuntimeEnvironment := request.URL.Query().Get("Environment")
+	GlobalEnvironment := request.URL.Query().Get("GlobalEnvironment")
+	AppEnvironment := request.URL.Query().Get("AppEnvironment")
 	emailID := request.URL.Query().Get("email")
 
 	log.Println("Start Date is", predeploymentdates)
 	log.Println("End Date is ", postdeploymentdates)
-	log.Println("pod1 namespace is ", pod1)
-	log.Println("ids namespace region is ", ids)
-	log.Println("environment is ", RuntimeEnvironment)
+	log.Println("Global environment is ", GlobalEnvironment)
+	log.Println("App environment is ", AppEnvironment)
 	log.Println("emailID is ", emailID)
 
 	condition1, beforedeployDates := utils.Validatetheinput(predeploymentdates, writer, request)
@@ -61,19 +59,21 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 	AfterDeploymentEndDate := AfterDeploymentDates[1]
 	log.Println("After Deployment Start Date is", AfterDeploymentStartDate)
 	log.Println("Before Deployment End Date is", AfterDeploymentEndDate)
-	fileNameCheck := "./htmlReports/" + "TimePeriod_" + beforedeploymentStartDate + "_" + beforedeploymentEndDate + "to" + AfterDeploymentStartDate + "_" + AfterDeploymentEndDate + ".html"
+	fileNameCheck := GlobalEnvironment + " and " + AppEnvironment + "_" + beforedeploymentStartDate + "_" + beforedeploymentEndDate + "to" + AfterDeploymentStartDate + "_" + AfterDeploymentEndDate + ".html"
 	fileNameCheck = strings.ReplaceAll(fileNameCheck, ":", "")
+	fileNameCheck = strings.ReplaceAll(fileNameCheck, "/", "_")
+	fileNameCheck = "./htmlReports/" + fileNameCheck
 
 	check := utils.CheckFileAlreadyExist(fileNameCheck, writer, request)
 	if !check {
 		log.Println("File is present")
 		return
 	}
-	utils.RespondWithJSON("Your request is under processing please wait for 10-15 minutes and do not send the request again", 200, writer, request)
+	utils.RespondWithJSON("Your request is under processing please wait for 10-15 minutes and do not send the request again", 202, writer, request)
 
-	oldIDS_Data, oldAPP_Pod_Data := utils.ReleaseData(beforedeploymentStartDate, beforedeploymentEndDate, ids, pod1, RuntimeEnvironment)
+	oldIDS_Data, oldAPP_Pod_Data := utils.ReleaseData(beforedeploymentStartDate, beforedeploymentEndDate, GlobalEnvironment, AppEnvironment)
 	fmt.Println(oldIDS_Data, oldAPP_Pod_Data)
-	newIDS_Data, newAPP_Pod_Data := utils.ReleaseData(AfterDeploymentStartDate, AfterDeploymentEndDate, ids, pod1, RuntimeEnvironment)
+	newIDS_Data, newAPP_Pod_Data := utils.ReleaseData(AfterDeploymentStartDate, AfterDeploymentEndDate, GlobalEnvironment, AppEnvironment)
 	fmt.Println(newIDS_Data, newAPP_Pod_Data)
 
 	if len(oldAPP_Pod_Data) == 0 || len(oldAPP_Pod_Data) == 0 || len(newIDS_Data) == 0 || len(newAPP_Pod_Data) == 0 {
@@ -86,7 +86,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 	if len(oldIDS_Data) != 0 && len(newIDS_Data) != 0 {
 		p = p + fmt.Sprintf("<div style='background:#80bfff;text-align:center'><p><b>Response Time Comparision between before Changes(%s to %s) and After Changes (%s to %s)</p> </b></div>", beforedeploymentStartDate, beforedeploymentEndDate, AfterDeploymentStartDate, AfterDeploymentEndDate)
 
-		countapisforGlobal = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Global Services </b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ")
+		countapisforGlobal = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Global Services %s</b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ", GlobalEnvironment)
 		html_for_Global_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Global Services </b></td></tr><tr><th>API</th><th>Before Changes</th><th>After Changes</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
 		newidsdataSorted := utils.SortingMap(newIDS_Data)
 		//log.Println(newidsdataSorted)
@@ -118,16 +118,15 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:White'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + percDiffvalue + " </td></tr>"
 					}
 					percDiff := utils.CalcPerc(float64(diff), float64(timeOld))
-
-					if percDiff < 0 && percDiff > -20 && timeOld !=0 && timeNew !=0 {
+					if percDiff < 0 && percDiff > -20 && timeOld != 0 && timeNew != 0 {
 						yellow = yellow + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Yellow'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff <= -20 && !math.IsInf(percDiff, 0)&& timeOld !=0 && timeNew !=0 {
+					if percDiff <= -20 && !math.IsInf(percDiff, 0) && timeOld != 0 && timeNew != 0 {
 						red = red + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Red'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff >= 0 && timeOld !=0 && timeNew !=0 {
+					if percDiff >= 0 && timeOld != 0 && timeNew != 0 {
 						green = green + 1
 						html_for_Global_Services = html_for_Global_Services + "<tr style='background:Green'><td>" + Label + "</td><td>" + strconv.FormatInt(int64(timeOld), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew), 10) + "</td><td>" + strconv.FormatInt(int64(diff), 10) + " </td><td>" + strconv.FormatFloat(percDiff, 'f', 2, 64) + " %</td></tr>"
 					}
@@ -151,7 +150,7 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 	var html_for_App_Services string
 
 	if len(oldAPP_Pod_Data) != 0 && len(newAPP_Pod_Data) != 0 {
-		countapisforApp = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Application Services </b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ")
+		countapisforApp = fmt.Sprintf("<table style='background:#99ebff;border-collapse: collapse;' border = '2'cellpadding = '6'><tbody><tr><td colspan=4 style='text-align:center;background-color:Lavender;color:Black;'><b>Performance Summary for Application Services %s</b></td></tr><tr><th>Label</th><th>Range</th><th>Use case Count</th><th>Color Code</th></tr> ", AppEnvironment)
 		html_for_App_Services = fmt.Sprintf("<table style='background:#99ebff;;border-collapse: collapse;' border = '2' cellpadding = '6'><tbody><tr><td colspan=5 style='text-align:center;background-color:Lavender;color:Black;'><b> Response Time Comparison for Application Services </b></td></tr><tr><th>API</th><th>Before Changes</th><th>After Changes</th><th>Time Difference</th><th> %% Time Difference</th></tr> ")
 		newAPP_POd_Sorted := utils.SortingMap(newAPP_Pod_Data)
 		log.Println(newAPP_POd_Sorted)
@@ -182,15 +181,15 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 						html_for_App_Services = html_for_App_Services + "<tr style='background:White'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + percDiffvalue1 + "</td></tr>"
 					}
 					percDiff1 := utils.CalcPerc(float64(diff1), float64(timeOld1))
-					if percDiff1 < 0 && percDiff1 > -20 && timeOld1 !=0 && timeNew1 !=0 {
+					if percDiff1 < 0 && percDiff1 > -20 && timeOld1 != 0 && timeNew1 != 0 {
 						yellow1 = yellow1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Yellow'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) && timeOld1 !=0 && timeNew1 !=0 {
+					if percDiff1 <= -20 && !math.IsInf(percDiff1, 0) && timeOld1 != 0 && timeNew1 != 0 {
 						red1 = red1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Red'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
-					if percDiff1 >= 0 && timeOld1 !=0 && timeNew1 !=0 {
+					if percDiff1 >= 0 && timeOld1 != 0 && timeNew1 != 0 {
 						green1 = green1 + 1
 						html_for_App_Services = html_for_App_Services + "<tr style='background:Green'><td>" + Label1 + "</td><td>" + strconv.FormatInt(int64(timeOld1), 10) + "</td><td>" + strconv.FormatInt(int64(timeNew1), 10) + "</td><td>" + strconv.FormatInt(int64(diff1), 10) + " </td><td>" + strconv.FormatFloat(percDiff1, 'f', 2, 64) + " %</td></tr>"
 					}
@@ -210,8 +209,10 @@ func compareResponseTimes(writer http.ResponseWriter, request *http.Request) {
 	p = p + fmt.Sprintf("<br><br> %s </tbody></table><br><br> %s </tbody></table><br><br> %s </tbody></table><br><br> %s </tbody></table><br><br>", countapisforGlobal, countapisforApp, html_for_Global_Services, html_for_App_Services)
 	utils.SendMail(p, subject, emailID)
 	//write to file
-	fileName := "./htmlReports/" + "TimePeriod_" + beforedeploymentStartDate + "_" + beforedeploymentEndDate + "to" + AfterDeploymentStartDate + "_" + AfterDeploymentEndDate + ".html"
+	fileName := GlobalEnvironment + " and " + AppEnvironment + "_" + beforedeploymentStartDate + "_" + beforedeploymentEndDate + "to" + AfterDeploymentStartDate + "_" + AfterDeploymentEndDate + ".html"
 	fileName = strings.ReplaceAll(fileName, ":", "")
+	fileName = strings.ReplaceAll(fileName, "/", "_")
+	fileName = "./htmlReports/" + fileName
 	f, err := os.Create(fileName)
 	if err != nil {
 		log.Println(err)
