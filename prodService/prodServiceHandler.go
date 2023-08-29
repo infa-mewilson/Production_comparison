@@ -26,9 +26,9 @@ func test(w http.ResponseWriter, r *http.Request) {
 	w.Write(jsonBody)
 }
 func displayenvdetails(w http.ResponseWriter, r *http.Request){
-	data := `<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
+	data := fmt.Sprintf("<!DOCTYPE html><html><head><title>Cloud Environments</title></head><body>
 		<h1>Global Environments</h1>
-		<ul>`
+		<ul>")
 		environments := []string{
 "AWS/IICS/PROD/MAIDS",
 "AWS/IICS/PROD/DMEM",
@@ -51,11 +51,11 @@ func displayenvdetails(w http.ResponseWriter, r *http.Request){
 "GCP/IICS/PROD/DMEM"
 }
 for _, env := range environments {
-data += fmt.Sprintf("<li>%s</li>", env)
+data = data + fmt.Sprintf("<li>%s</li>", env)
 }
-data += `</ul></body></html>`
+data = data+ fmt.Sprintf("</ul></body></html>
 <h1>Application Environments</h1>
-<ul>
+<ul>")
 Applenvironments := []string{
 "AWS/IICS/PROD/USW1",
 "AWS/IICS/PROD/USW3",
@@ -84,7 +84,7 @@ Applenvironments := []string{
 "GCP/IICS/PROD/EMW2"
 }
 for _, env1 := range Applenvironments {
-data += fmt.Sprintf("<li>%s</li>", env1)
+data = data+ fmt.Sprintf("<li>%s</li>", env1)
 }
 w.Header().Set("Content-Type", "text/html")
 fmt.Fprint(w, data)
