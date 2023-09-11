@@ -1,0 +1,119 @@
+{
+  "iics-qa-perfusw1":[
+     {
+      "scheduler-service":["POST /scheduler-service/api/v1/Schedules","GET /scheduler-service/internal/api/v1/Jobs","POST /scheduler-service/api/v1/Schedules *and* /Jobs","PUT /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Schedules","DELETE /scheduler-service/api/v1/Jobs","GET /scheduler-service/api/v1/Jobs","DELETE /scheduler-service/api/v1/Schedules","GET /scheduler-service/api/v1/Organizations *and* /Schedules"],
+      "containername":"scheduler-service",
+      "logfilepath":"*/var/log/containers/scheduler*"
+    },
+    {
+      "kms-service":["POST /kms-service/internal/api/v1/EncryptWithDataKey","POST /kms-service/internal/api/v1/DecryptWithMasterKey"],
+      "containername":"kms-service",
+      "logfilepath":"*/var/log/containers/kms*"
+    },
+    {
+        "notification-service":["GET /notification-service/api/v1/Users( *and* )/ReceivedMessages?$count=true&$filter=status%20eq%20%27NEW%27%20and%20(messageType%20eq%20%27BELL_NOTIFICATION%27)&$top=0","POST /notification-service/internal/api/v1/Topics('user *and* )/Messages","POST /notification-service/internal/api/v1/Topics('org *and* )/Messages","POST /notification-service/api/v1/MarkAllNotificationsAsRead"],
+        "containername":"notification-service",
+        "logfilepath":"*/var/log/containers/notification-service*"
+    },
+    {
+        "ca-service":["POST /ca-service/api/v1/Sign"],
+        "containername":"ca-service",
+        "logfilepath":"*/var/log/containers/ca-service*"
+    },
+    {   "license-service":["POST /license-service/podlink/api/v1/OrgLicenseAssignment( *and* )/AssignEdition()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/View()","GET /license-service/api/v1/OrgLicenseAssignment( *and* )/EffectiveLicenses()","GET /license-service/internal/api/v1/OrgLicenseAssignment( *and* )/EffectiveAppExternalId()","GET /license-service/api/v1/ipu/org/ *and* /currentUsageProjections","GET /license-service/api/v1/ipu/org/ *and* /heroStats?meterId=","GET /license-service/api/v1/ipu/org/ *and* /historicalChartData?meterId=","GET /license-service/api/v1/ipu/org/ *and* /historicalTableData?meterId","GET /license-service/api/v1/ipu/org/ *and* /downloadTableData?meterId","POST /license-service/api/v1/ipu/calculator/command","GET /license-service/api/v1/MeteringUIView/","POST /license-service/api/v1/metering/org/usage/submitabsolutemeters","POST /license-service/api/v1/metering/org/ *and* /usage/increment","POST /license-service/api/v1/metering/org/usage/increment","GET /license-service/api/v1/metering/definitions","GET /license-service/api/v1/metering/org/ *and* /usage","GET /license-service/podlink/api/v1/metering/org/ *and* /usage","POST /license-service/podlink/api/v1/metering/org/ *and* /usage","GET /license-service/internal/api/v1/metering/org/ *and* /usage","POST /license-service/api/v1/metering/org/ *and* /usage","GET /license-service/api/v1/metering/currBillingPeriodMeterConsumptions/"],
+        "containername":"license-service",
+        "logfilepath":"*/var/log/containers/license-service*"
+    },
+    {
+        "jls-service":["GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries","GET /jls-di/api/v1/JobStatusChart","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$count=true&$top=0&$filter=startedBy","GET /jls-di/api/v1/Orgs( *and* )/JobLogEntries?$skip=0&$top=25&$filter=startedBy"],
+        "containername":"jls-di",
+        "logfilepath":"*/var/log/containers/jls-di*"
+    },
+    {
+        "bundle-service":["GET /bundle-service/api/v1/BundleInstallations"],
+        "containername":"bundle-service",
+        "logfilepath":"*/var/log/containers/bundle-service*"
+    },
+    {
+        "session-service":["GET /session-service/api/v1/session/User","GET /session-service/api/v1/session/Agent","GET /session-service/internal/api/v1/cache/ServiceAndUserInfo","GET /session-service/api/v1/Orgs( *and* )/Parent","DELETE /session-service/api/v1/session/Logout"],
+        "containername":"session-service",
+        "logfilepath":"*/var/log/containers/session-service*"
+    },
+    {
+        "frs":["GET /frs/internal/api/v1/DocumentTypes","GET /frs/api/v1/Projects","POST /frs/api/v1/Projects","POST /frs/v1/Projects *and* /Folders","GET /frs/api/v1/Projects","GET /frs/v1/Folders(","POST /frs/api/v1/UpdateEntityAccess","POST /frs/internal/api/v1/GetPermissions","POST frs/internal/api/v1/GetEffPrivilegeForDoctypeContainer","GET /frs/api/v1/Projects?$expand=sourceControlAttributes&$orderby=name","POST /frs/v1/LookupArtifactsDetailsByPath","GET /frs/api/v1/FetchProjectStatForRecentEntity()","GET /frs/api/v1/FetchDefaultLocation()","GET /frs/api/v1/BaseEntities"],
+        "containername":"frs",
+        "logfilepath":"*/var/log/containers/frs*"
+    },
+    {
+        "audit-service":["GET /auditlog-service/internal/api/v1/Orgs *and* /AuditEntries"],
+        "containername":"auditlog-service",
+        "logfilepath":"*/var/log/containers/auditlog-service*"
+    },
+    {
+        "preference-service":["POST /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/api/v1/Users *and* )/Preferences","PUT /preference-service/api/v1/Users( *and* )/Preferences","DELETE /preference-service/api/v1/Users( *and* )/Preferences","GET /preference-service/internal/api/v1/System/Preferences","POST /preference-service/api/v1/Orgs( *and* )/Preferences","GET /preference-service/api/v1/Orgs( *and* )/Preferences"],
+        "containername":"preference-service",
+        "logfilepath":"*/var/log/containers/preference-service*"
+    },
+    {
+        "migration-service":["POST /migration/api/v1/ImportJobs/$package","POST /migration/api/v1/ImportJobs( *and* /OData.migration_service.StartImportJob","GET /migration/api/v1/ImportJobs","GET /migration/api/v1/ImportJobs( *and* /ImportObjects","POST /migration/api/v1/ExportJobs","GET /migration/api/v1/ExportJobs","GET migration/api/v1/ExportJobs( *and* )/ExportObjects"],
+        "containername":"migration-service",
+        "logfilepath":"*/var/log/containers/migration-service*"
+    },
+    {
+        "admin-service":["POST /admin-service/api/v1/predownload/agent/ *and* /available"],
+        "containername":"admin-service",
+        "logfilepath":"*/var/log/containers/admin-service*"
+    },
+    {
+        "vcs":["GET /vcs/api/v1/RepoConnection/orgId/","GET /vcs/api/v1/UserCredential/userId/"],
+        "containername":"vcs",
+        "logfilepath":"*/var/log/containers/vcs*"
+    },
+    {
+        "ac-service":["GET /ac/logout","GET /ac/resources/static/images/dlg_close.gif","GET /ac/resources/static/images/Loading.gif"],
+        "containername":"ac",
+        "logfilepath":"*/var/log/containers/ac*"
+    },
+    {
+        "ldm-service":["GET /ldm/api/v1/connection"],
+        "containername":"ldm-service",
+        "logfilepath":"*/var/log/containers/ldm-service*"
+    },
+    {
+        "runtime":["GET /saas/api/v2/agent/details/","GET /saas/api/v2/agent/","GET /saas/api/v2/agent/name/","GET /saas/api/v2/runtimeEnvironment/","GET /saas/api/v2/runtimeEnvironment/name/","GET /saas/api/v2/connection"],
+        "containername":"not using for runtime",
+        "logfilepath":"/var/log/haproxy.log"
+    }
+  ],
+  "iics-qa-perfids":[
+	{
+      "auth-service":["GET /authz-service/.well-known/jwks.json","POST /authz-service/oauth/token"],
+      "containername":"authz-service",
+      "logfilepath":"*/var/log/containers/auth*"
+    },{
+      "branding-service":["GET /branding-service/api/v1/OrgBranding","POST /branding-service/api/v1/OrgBranding","DELETE /branding-service/api/v1/OrgBranding","GET /branding-service/api/v1/Themes"],
+      "containername":"branding-service",
+      "logfilepath":"*/var/log/containers/branding-service*"
+    },{
+      "content-repository":["GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_MAPPINGS')?$expand=tags","GET /content-repo/api/v1/GetNewAssetContentsWithTags(tagNames='NEW_ASSET_TASKFLOWS)?$expand=tags"],
+      "containername":"content-repository-service",
+      "logfilepath":"*/var/log/containers/content-repository-service*"
+    },{
+      "ids-service":["POST /identity-service/api/v1/Login","POST /identity-service/api/v1/VerifyIdentity","GET /identity-service/agent/api/v1/Ping","GET /identity-service/api/v1/CurrentUserInfo","POST /identity-service/api/v1/Users","POST /identity-service/agent/api/v1/Login","POST /identity-service/api/v1/Orgs","GET /identity-service/home","DELETE /identity-service/api/v1/Users(","DELETE /identity-service/api/v1/Orgs(","POST /identity-service/podlink/api/v1/Token/LoginAs","POST /identity-service/podlink/api/v1/Login","POST /identity-service/podlink/agent/api/v1/Login","POST /identity-service/agent/api/v1/Logout","POST /identity-service/api/v1/Logout"],
+      "containername":"identity-service",
+      "logfilepath":"*/var/log/containers/identity-service*"
+    },{
+      "ma-service":["GET /ma/api/v3/SCIMToken","POST /ma/api/v2/user/login","POST /ma/api/v2/user/logout","POST /ma/api/v3/InternalLogin","GET /ma/api/v3/Users(","GET /ma/home","POST /ma/podlink/api/v3/Login","POST /ma/api/v3/Users","POST /ma/api/v3/DeleteUser","POST /ma/api/v3/agent/Login","POST /ma/api/v3/agent/Logout","POST /ma/api/v3/Logout"],
+      "containername":"ma-service",
+      "logfilepath":"*/var/log/containers/ma-service*"
+    },{
+      "scim-service":["GET /scim-service/Users/","GET /scim-service/v2/Users/","GET /scim-service/Groups/","POST /scim-service/Users","PATCH /scim-service/Users/","POST /scim-service/v2/Groups","PATCH /scim-service/v2/Groups/","PUT /scim-service/v2/Groups/","GET /scim-service/Groups?excludedAttributes=members&filter=displayName","DELETE /scim-service/Users/","DELETE /scim-service/Groups/"],
+      "containername":"scim-service",
+      "logfilepath":"*/var/log/containers/scim-service*"
+    },{
+      "v3api":["POST /saas/public/core/v3/login","GET /saas/public/core/v3/objects","POST /saas/public/core/v3/export","POST /saas/public/core/v3/lookup","PUT /saas/public/core/v3/Orgs/ *and* /addSamlGroupMappings"],
+      "containername":"v3api",
+      "logfilepath":"*/var/log/containers/v3api*"
+    }
+]
+}
