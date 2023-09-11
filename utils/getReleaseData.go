@@ -14,7 +14,8 @@ func ReleaseData(StartDate string, EndDate string, GlobalEnv string, AppEnv stri
 	goFileURL := "https://raw.githubusercontent.com/infa-mewilson/Production_comparison/main/utils/API_Details.txt"
 	resp, err := http.Get(goFileURL)
 	if err != nil {
-		http.Error(writer, "Failed to fetch Go file from GitHub", http.StatusInternalServerError)
+		//http.Error(writer, "Failed to fetch Go file from GitHub", http.StatusInternalServerError)
+		fmt.Println("Error Fetching Values from API text file")
 		return nil,nil
 	}
 	defer resp.Body.Close()
@@ -22,13 +23,14 @@ func ReleaseData(StartDate string, EndDate string, GlobalEnv string, AppEnv stri
 	// Read the response body
 	contentBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		http.Error(writer, "Failed to read response body", http.StatusInternalServerError)
+		//http.Error(writer, "Failed to read response body", http.StatusInternalServerError)
+		fmt.Println("Error Fetching Values")
 		return nil,nil
 	}
 	listdetails := string(contentBytes)
 	var result config.APIDteails
 
-	err := json.Unmarshal([]byte(listdetails), &result)
+	err = json.Unmarshal([]byte(listdetails), &result)
 	if err != nil {
 		fmt.Println("Error:", err)
 		return nil, nil
