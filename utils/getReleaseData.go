@@ -15,7 +15,7 @@ func ReleaseData(StartDate string, EndDate string, GlobalEnv string, AppEnv stri
 	resp, err := http.Get(goFileURL)
 	if err != nil {
 		http.Error(writer, "Failed to fetch Go file from GitHub", http.StatusInternalServerError)
-		return
+		return nil,nil
 	}
 	defer resp.Body.Close()
 
@@ -23,7 +23,7 @@ func ReleaseData(StartDate string, EndDate string, GlobalEnv string, AppEnv stri
 	contentBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		http.Error(writer, "Failed to read response body", http.StatusInternalServerError)
-		return
+		return nil,nil
 	}
 	listdetails := string(contentBytes)
 	var result config.APIDteails
