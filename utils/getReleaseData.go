@@ -4,6 +4,8 @@ import (
 	"NEWGOLANG/config"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 func ReleaseData(StartDate string, EndDate string, GlobalEnv string, AppEnv string) (map[string]config.Value, map[string]config.Value) {
