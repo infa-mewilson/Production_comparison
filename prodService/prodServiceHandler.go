@@ -46,7 +46,8 @@ func displayenvdetails(w http.ResponseWriter, r *http.Request){
 "AZURE/IICS/PROD/AUIDS",
 "AZURE/IICS/PROD/NTTJP1-IDS",
 "GCP/IICS/PROD/MAIDS",
-"GCP/IICS/PROD/DMEM"}
+"GCP/IICS/PROD/DMEM",
+"OCI/IICS/PROD/MAIDS"}
 for _, env := range environments {
 data = data + fmt.Sprintf("<li>%s</li>", env)
 }
@@ -76,7 +77,8 @@ Applenvironments := []string{
 "AZURE/IICS/PROD/EMSE1",
 "AZURE/IICS/PROD/NTTJP1-POD",
 "GCP/IICS/PROD/USW1",
-"GCP/IICS/PROD/EMW2"}
+"GCP/IICS/PROD/EMW2",
+"OCI/IICS/PROD/USE1"}
 for _, env1 := range Applenvironments {
 data = data+ fmt.Sprintf("<li>%s</li>", env1)
 }
